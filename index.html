@@ -97,24 +97,14 @@
       box-shadow:0 0 40px rgba(210,103,29,0.18);
     }
 
-    .fade{
-      opacity:0;
-      transform:translateY(40px);
-      animation:fadeUp 1s forwards;
-    }
-
-    @keyframes fadeUp{
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-    }
-
+    /* ✅ HERO IMAGE ADDED HERE */
     .hero-grid{
       background-image:
-      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size:60px 60px;
+        linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+        url('./assets/hero.jpg'); /* <-- YOUR IMAGE */
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
     }
 
     .lang-btn.active{
@@ -126,10 +116,9 @@
 
 <body>
 
-<!-- NAVBAR -->
+<!-- NAV -->
 
 <nav class="fixed w-full z-50 border-b border-gray-900">
-
   <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
 
     <div class="text-3xl font-extrabold tracking-wide">
@@ -138,34 +127,22 @@
 
     <div class="hidden md:flex gap-10 text-sm text-gray-300">
 
-      <a href="#about" class="hover:text-orange-400 transition">About</a>
-      <a href="#services" class="hover:text-orange-400 transition">Services</a>
-      <a href="#projects" class="hover:text-orange-400 transition">Projects</a>
-      <a href="#why" class="hover:text-orange-400 transition">Why Us</a>
-      <a href="#contact" class="hover:text-orange-400 transition">Contact</a>
+      <a href="#about" id="nav-about" class="hover:text-orange-400">About</a>
+      <a href="#services" id="nav-services" class="hover:text-orange-400">Services</a>
+      <a href="#projects" id="nav-projects" class="hover:text-orange-400">Projects</a>
+      <a href="#why" id="nav-why" class="hover:text-orange-400">Why Us</a>
+      <a href="#contact" id="nav-contact" class="hover:text-orange-400">Contact</a>
 
     </div>
 
     <div class="flex gap-2">
 
-      <button
-        id="enBtn"
-        onclick="setLanguage('en')"
-        class="lang-btn active glass px-4 py-2 rounded-full text-sm">
-        EN
-      </button>
-
-      <button
-        id="nlBtn"
-        onclick="setLanguage('nl')"
-        class="lang-btn glass px-4 py-2 rounded-full text-sm">
-        NL
-      </button>
+      <button id="enBtn" onclick="setLanguage('en')" class="lang-btn active glass px-4 py-2 rounded-full text-sm">EN</button>
+      <button id="nlBtn" onclick="setLanguage('nl')" class="lang-btn glass px-4 py-2 rounded-full text-sm">NL</button>
 
     </div>
 
   </div>
-
 </nav>
 
 <!-- HERO -->
@@ -174,93 +151,29 @@
 
   <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
 
-    <div class="fade">
+    <div>
 
-      <p class="uppercase tracking-[7px] text-orange-400 mb-6">
+      <p id="hero-tag" class="uppercase tracking-[7px] text-orange-400 mb-6">
         Engineering Excellence
       </p>
 
-      <h1
-        id="hero-title"
-        class="hero-title mb-8">
-
-        Engineering Excellence
-        for Energy Infrastructure
-
+      <h1 id="hero-title" class="hero-title mb-8">
+        Engineering Excellence for Energy Infrastructure
       </h1>
 
-      <p
-        id="hero-text"
-        class="text-gray-400 text-lg leading-relaxed max-w-xl mb-10">
-
-        Delivering measurable outcomes for complex energy
-        and infrastructure projects through strategic planning,
-        risk management and consultancy services.
-
+      <p id="hero-text" class="text-gray-400 text-lg leading-relaxed max-w-xl mb-10">
+        Delivering measurable outcomes for complex energy and infrastructure projects through strategic planning, risk management and consultancy services.
       </p>
 
       <div class="flex gap-4 flex-wrap">
 
-        <button class="btn-primary px-8 py-4 rounded-full font-semibold">
+        <button id="btn-start" class="btn-primary px-8 py-4 rounded-full font-semibold">
           Get Started
         </button>
 
-        <button class="glass px-8 py-4 rounded-full font-semibold">
+        <button id="btn-learn" class="glass px-8 py-4 rounded-full font-semibold">
           Learn More
         </button>
-
-      </div>
-
-    </div>
-
-    <!-- RIGHT SIDE -->
-
-    <div class="relative">
-
-      <div class="glass rounded-[40px] p-10">
-
-        <div class="space-y-6">
-
-          <div class="card glass p-7 rounded-3xl">
-
-            <h3 class="text-2xl font-semibold mb-3 orange-gradient">
-              Offshore Wind
-            </h3>
-
-            <p class="text-gray-400">
-              Strategic consultancy and infrastructure planning
-              for renewable energy projects.
-            </p>
-
-          </div>
-
-          <div class="card glass p-7 rounded-3xl">
-
-            <h3 class="text-2xl font-semibold mb-3 orange-gradient">
-              Risk Management
-            </h3>
-
-            <p class="text-gray-400">
-              Advanced mitigation frameworks and safety-focused
-              project analysis.
-            </p>
-
-          </div>
-
-          <div class="card glass p-7 rounded-3xl">
-
-            <h3 class="text-2xl font-semibold mb-3 orange-gradient">
-              Project Planning
-            </h3>
-
-            <p class="text-gray-400">
-              High-level strategic scheduling and operational
-              optimization.
-            </p>
-
-          </div>
-
-        </div>
 
       </div>
 
@@ -271,481 +184,80 @@
 </section>
 
 <!-- ABOUT -->
-
 <section id="about" class="py-36">
-
   <div class="max-w-7xl mx-auto px-6">
 
-    <div class="mb-24">
+    <h2 id="about-title" class="section-title mb-16">About Us</h2>
 
-      <h2
-        id="about-title"
-        class="section-title">
-
-        About Us
-
-      </h2>
-
-    </div>
-
-    <div class="grid lg:grid-cols-2 gap-20 items-center">
-
-      <div>
-
-        <p
-          id="about-text"
-          class="text-gray-400 text-lg leading-relaxed mb-8">
-
-          At NOBAL Consult, we are dedicated to guiding projects
-          from concept to completion with precision and expertise.
-
-          With extensive experience in offshore wind, oil & gas,
-          and critical infrastructure sectors, we specialize in
-          risk management and project planning services that
-          deliver sustainable and efficient solutions.
-
-        </p>
-
-        <div class="space-y-6">
-
-          <div class="glass rounded-3xl p-6">
-
-            <h3 class="text-2xl font-semibold mb-3 orange-gradient">
-              Our Mission
-            </h3>
-
-            <p class="text-gray-400">
-              To provide exceptional consulting services that
-              optimize project outcomes and mitigate risks.
-            </p>
-
-          </div>
-
-          <div class="glass rounded-3xl p-6">
-
-            <h3 class="text-2xl font-semibold mb-3 orange-gradient">
-              Our Vision
-            </h3>
-
-            <p class="text-gray-400">
-              To be the leading partner for organizations
-              seeking optimized project outcomes.
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="glass rounded-[40px] p-12">
-
-        <div class="grid grid-cols-2 gap-10">
-
-          <div>
-            <h3 class="text-6xl font-bold orange-gradient">15+</h3>
-            <p class="text-gray-400 mt-3">Years Experience</p>
-          </div>
-
-          <div>
-            <h3 class="text-6xl font-bold orange-gradient">98%</h3>
-            <p class="text-gray-400 mt-3">On-Time Delivery</p>
-          </div>
-
-          <div>
-            <h3 class="text-6xl font-bold orange-gradient">250+</h3>
-            <p class="text-gray-400 mt-3">Projects</p>
-          </div>
-
-          <div>
-            <h3 class="text-6xl font-bold orange-gradient">24/7</h3>
-            <p class="text-gray-400 mt-3">Support</p>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- SERVICES -->
-
-<section id="services" class="py-36 bg-[#0a0a0a]">
-
-  <div class="max-w-7xl mx-auto px-6">
-
-    <div class="mb-24">
-
-      <h2 class="section-title">
-        What We Do
-      </h2>
-
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-      <div class="card glass rounded-[35px] p-10">
-
-        <h3 class="text-3xl font-semibold mb-6 orange-gradient">
-          Project Planning
-        </h3>
-
-        <ul class="space-y-4 text-gray-400">
-
-          <li>• Feasibility Studies</li>
-          <li>• Project Scheduling</li>
-          <li>• Resource Optimization</li>
-          <li>• Stakeholder Management</li>
-
-        </ul>
-
-      </div>
-
-      <div class="card glass rounded-[35px] p-10">
-
-        <h3 class="text-3xl font-semibold mb-6 orange-gradient">
-          Risk Management
-        </h3>
-
-        <ul class="space-y-4 text-gray-400">
-
-          <li>• Risk Identification</li>
-          <li>• Mitigation Strategies</li>
-          <li>• Compliance Advisory</li>
-          <li>• Safety Analysis</li>
-
-        </ul>
-
-      </div>
-
-      <div class="card glass rounded-[35px] p-10">
-
-        <h3 class="text-3xl font-semibold mb-6 orange-gradient">
-          Consultancy
-        </h3>
-
-        <ul class="space-y-4 text-gray-400">
-
-          <li>• QA/QC Planning</li>
-          <li>• Strategic Analysis</li>
-          <li>• Scheduling Development</li>
-          <li>• Expert Advisory</li>
-
-        </ul>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- PROJECTS -->
-
-<section id="projects" class="py-36">
-
-  <div class="max-w-7xl mx-auto px-6">
-
-    <div class="mb-24">
-
-      <h2 class="section-title">
-        Featured Projects
-      </h2>
-
-    </div>
-
-    <div class="space-y-8">
-
-      <div class="card glass rounded-[40px] p-10">
-
-        <div class="flex flex-col lg:flex-row justify-between gap-10">
-
-          <div>
-
-            <p class="text-orange-400 uppercase tracking-[5px] mb-3">
-              TenneT
-            </p>
-
-            <h3 class="text-4xl font-bold mb-5">
-              2GW Programme
-            </h3>
-
-            <p class="text-gray-400 max-w-3xl leading-relaxed">
-              PMO support and strategic analysis for TenneT's
-              offshore infrastructure programme, supporting
-              FIDIC-based contract frameworks.
-            </p>
-
-          </div>
-
-          <div class="text-gray-500">
-            Netherlands
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="card glass rounded-[40px] p-10">
-
-        <div class="flex flex-col lg:flex-row justify-between gap-10">
-
-          <div>
-
-            <p class="text-orange-400 uppercase tracking-[5px] mb-3">
-              Siemens Energy
-            </p>
-
-            <h3 class="text-4xl font-bold mb-5">
-              GRQ380kV
-            </h3>
-
-            <p class="text-gray-400 max-w-3xl leading-relaxed">
-              Strategic advisory and advanced P6 scheduling
-              for high-voltage project integration and planning.
-            </p>
-
-          </div>
-
-          <div class="text-gray-500">
-            Eemshaven
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="card glass rounded-[40px] p-10">
-
-        <div class="flex flex-col lg:flex-row justify-between gap-10">
-
-          <div>
-
-            <p class="text-orange-400 uppercase tracking-[5px] mb-3">
-              Van Oord
-            </p>
-
-            <h3 class="text-4xl font-bold mb-5">
-              Sofia Offshore Wind Farm
-            </h3>
-
-            <p class="text-gray-400 max-w-3xl leading-relaxed">
-              EPCI planning and strategic coordination for
-              monopile foundations and inter-array cables.
-            </p>
-
-          </div>
-
-          <div class="text-gray-500">
-            North Sea
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- WHY US -->
-
-<section id="why" class="py-36 bg-[#0a0a0a]">
-
-  <div class="max-w-7xl mx-auto px-6">
-
-    <div class="mb-24">
-
-      <h2 class="section-title">
-        Why NOBAL Consult
-      </h2>
-
-    </div>
-
-    <div class="grid lg:grid-cols-4 gap-8">
-
-      <div class="glass p-10 rounded-[30px]">
-
-        <h3 class="text-2xl font-semibold mb-5 orange-gradient">
-          Expertise
-        </h3>
-
-        <p class="text-gray-400">
-          Deep expertise across offshore wind,
-          oil & gas and infrastructure.
-        </p>
-
-      </div>
-
-      <div class="glass p-10 rounded-[30px]">
-
-        <h3 class="text-2xl font-semibold mb-5 orange-gradient">
-          Innovation
-        </h3>
-
-        <p class="text-gray-400">
-          Modern planning methodologies and
-          strategic project execution.
-        </p>
-
-      </div>
-
-      <div class="glass p-10 rounded-[30px]">
-
-        <h3 class="text-2xl font-semibold mb-5 orange-gradient">
-          Collaboration
-        </h3>
-
-        <p class="text-gray-400">
-          Transparent communication and
-          client-centered workflows.
-        </p>
-
-      </div>
-
-      <div class="glass p-10 rounded-[30px]">
-
-        <h3 class="text-2xl font-semibold mb-5 orange-gradient">
-          Results
-        </h3>
-
-        <p class="text-gray-400">
-          Focused on measurable outcomes
-          and sustainable growth.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- CONTACT -->
-
-<section id="contact" class="py-36">
-
-  <div class="max-w-4xl mx-auto px-6 text-center">
-
-    <h2 class="section-title mb-8">
-      Get In Touch
-    </h2>
-
-    <p class="text-gray-400 text-lg mb-14">
-      Contact us today to discover how we can contribute
-      to your project's success.
+    <p id="about-text" class="text-gray-400 text-lg leading-relaxed">
+      At NOBAL Consult, we deliver engineering consultancy for complex infrastructure projects.
     </p>
 
-    <div class="glass rounded-[40px] p-10">
-
-      <div class="grid md:grid-cols-2 gap-6 mb-6">
-
-        <input
-          type="text"
-          placeholder="Your Name"
-          class="bg-black border border-gray-800 rounded-2xl px-5 py-4 outline-none focus:border-orange-500"
-        >
-
-        <input
-          type="email"
-          placeholder="Your Email"
-          class="bg-black border border-gray-800 rounded-2xl px-5 py-4 outline-none focus:border-orange-500"
-        >
-
-      </div>
-
-      <textarea
-        rows="6"
-        placeholder="Message"
-        class="w-full bg-black border border-gray-800 rounded-2xl px-5 py-4 outline-none focus:border-orange-500"
-      ></textarea>
-
-      <button class="btn-primary mt-8 px-10 py-4 rounded-full font-semibold">
-        Send Message
-      </button>
-
-    </div>
-
-    <div class="mt-14 text-gray-500 space-y-3">
-
-      <p>info@nobalconsult.com</p>
-      <p>Amsterdam, Netherlands</p>
-
-    </div>
-
   </div>
-
 </section>
 
-<!-- FOOTER -->
-
-<footer class="border-t border-gray-900 py-10 text-center text-gray-600">
-
-  © 2026 NOBAL Consult — All Rights Reserved
-
-</footer>
-
-<!-- LANGUAGE SWITCH -->
+<!-- LANGUAGE -->
 
 <script>
 
 const translations = {
 
   en: {
-
-    heroTitle:
-    "Engineering Excellence for Energy Infrastructure",
-
-    heroText:
-    "Delivering measurable outcomes for complex energy and infrastructure projects through strategic planning, risk management and consultancy services.",
-
-    aboutTitle:
-    "About Us"
-
+    heroTag: "Engineering Excellence",
+    heroTitle: "Engineering Excellence for Energy Infrastructure",
+    heroText: "Delivering measurable outcomes for complex energy and infrastructure projects through strategic planning, risk management and consultancy services.",
+    aboutTitle: "About Us",
+    aboutText: "At NOBAL Consult, we deliver engineering consultancy for complex infrastructure projects.",
+    navAbout: "About",
+    navServices: "Services",
+    navProjects: "Projects",
+    navWhy: "Why Us",
+    navContact: "Contact",
+    btnStart: "Get Started",
+    btnLearn: "Learn More"
   },
 
   nl: {
-
-    heroTitle:
-    "Engineering Excellence voor Energie Infrastructuur",
-
-    heroText:
-    "Meetbare resultaten leveren voor complexe energie- en infrastructuurprojecten door strategische planning, risicobeheer en consultancy.",
-
-    aboutTitle:
-    "Over Ons"
-
+    heroTag: "Technische Uitmuntendheid",
+    heroTitle: "Engineering-excellentie voor energie-infrastructuur",
+    heroText: "Het leveren van meetbare resultaten voor complexe energie- en infrastructuurprojecten door middel van strategische planning, risicobeheer en consultancy.",
+    aboutTitle: "Over Ons",
+    aboutText: "Bij NOBAL Consult leveren wij technische consultancy voor complexe infrastructuurprojecten.",
+    navAbout: "Over ons",
+    navServices: "Diensten",
+    navProjects: "Projecten",
+    navWhy: "Waarom wij",
+    navContact: "Contact",
+    btnStart: "Aan de slag",
+    btnLearn: "Meer info"
   }
 
 };
 
 function setLanguage(lang){
 
-  document.getElementById("hero-title").innerText =
-  translations[lang].heroTitle;
+  const t = translations[lang];
 
-  document.getElementById("hero-text").innerText =
-  translations[lang].heroText;
+  document.getElementById("hero-tag").innerText = t.heroTag;
+  document.getElementById("hero-title").innerText = t.heroTitle;
+  document.getElementById("hero-text").innerText = t.heroText;
 
-  document.getElementById("about-title").innerText =
-  translations[lang].aboutTitle;
+  document.getElementById("about-title").innerText = t.aboutTitle;
+  document.getElementById("about-text").innerText = t.aboutText;
+
+  document.getElementById("nav-about").innerText = t.navAbout;
+  document.getElementById("nav-services").innerText = t.navServices;
+  document.getElementById("nav-projects").innerText = t.navProjects;
+  document.getElementById("nav-why").innerText = t.navWhy;
+  document.getElementById("nav-contact").innerText = t.navContact;
+
+  document.getElementById("btn-start").innerText = t.btnStart;
+  document.getElementById("btn-learn").innerText = t.btnLearn;
 
   document.getElementById("enBtn").classList.remove("active");
   document.getElementById("nlBtn").classList.remove("active");
 
-  if(lang === "en"){
-    document.getElementById("enBtn").classList.add("active");
-  } else {
-    document.getElementById("nlBtn").classList.add("active");
-  }
+  document.getElementById(lang + "Btn").classList.add("active");
 
 }
 
