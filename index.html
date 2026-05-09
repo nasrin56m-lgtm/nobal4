@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOBAL Consult</title>
+
+  <style>
+    :root {
+      --orange: #c85a17;
+      --orange-dark: #8f370b;
+      --black: #050505;
+      --grey: #8a8a8a;
+      --dark-grey: #171717;
+      --light-grey: #d4d4d4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--black);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(200, 90, 23, 0.25), transparent 30%),
+        radial-gradient(circle at 80% 60%, rgba(120, 120, 120, 0.18), transparent 35%),
+        linear-gradient(135deg, #050505, #111, #050505);
+      z-index: -2;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 45px 45px;
+      z-index: -1;
+      opacity: .25;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(5, 5, 5, .75);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: white;
+    }
+
+    .logo span {
+      color: var(--orange);
+    }
+
+    nav {
+      display: flex;
+      gap: 26px;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--light-grey);
+      text-decoration: none;
+      font-size: 14px;
+      transition: .3s;
+    }
+
+    nav a:hover {
+      color: var(--orange);
+    }
+
+    .language {
+      display: flex;
+      gap: 8px;
+      background: #111;
+      padding: 5px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,.1);
+    }
+
+    .language button {
+      border: none;
+      padding: 8px 13px;
+      border-radius: 50px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--grey);
+      font-weight: 700;
+    }
+
+    .language button.active {
+      background: var(--orange);
+      color: black;
+    }
+
+    section {
+      padding: 110px 7%;
+      position: relative;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: center;
+      gap: 50px;
+      padding-top: 140px;
+    }
+
+    .tag {
+      color: var(--orange);
+      letter-spacing: 4px;
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(48px, 8vw, 96px);
+      line-height: .95;
+      max-width: 900px;
+      margin-bottom: 30px;
+    }
+
+    h1 span, h2 span {
+      color: var(--orange);
+    }
+
+    .hero p {
+      color: var(--light-grey);
+      font-size: 20px;
+      line-height: 1.7;
+      max-width: 700px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 18px;
+      margin-top: 38px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 26px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 800;
+      transition: .3s;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: black;
+    }
+
+    .btn-primary:hover {
+      background: white;
+      transform: translateY(-4px);
+    }
+
+    .btn-secondary {
+      color: white;
+      border: 1px solid rgba(255,255,255,.2);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+      transform: translateY(-4px);
+    }
+
+    .orb {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        linear-gradient(145deg, rgba(200,90,23,.9), rgba(20,20,20,.9)),
+        radial-gradient(circle, var(--orange), transparent);
+      box-shadow: 0 0 90px rgba(200,90,23,.35);
+      animation: float 5s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 45px;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+
+    .orb h3 {
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-22px); }
+    }
+
+    .section-title {
+      font-size: clamp(36px, 5vw, 68px);
+      margin-bottom: 35px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: rgba(23,23,23,.78);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 28px;
+      padding: 34px;
+      transition: .35s;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 4px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: .35s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(200,90,23,.55);
+      box-shadow: 0 25px 70px rgba(0,0,0,.5);
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card h3 {
+      color: var(--orange);
+      margin-bottom: 16px;
+      font-size: 24px;
+    }
+
+    .card p, .card li {
+      color: var(--light-grey);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .card ul {
+      margin-left: 18px;
+      margin-top: 12px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .big-text {
+      color: var(--light-grey);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 35px;
+    }
+
+    .stat {
+      padding: 25px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--orange);
+      font-size: 38px;
+      margin-bottom: 8px;
+    }
+
+    .projects .card {
+      min-height: 310px;
+    }
+
+    .project-label {
+      color: var(--grey);
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .contact-box {
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+      background: linear-gradient(145deg, rgba(200,90,23,.16), rgba(23,23,23,.95));
+      border: 1px solid rgba(200,90,23,.35);
+      padding: 55px;
+      border-radius: 36px;
+    }
+
+    .contact-box p {
+      color: var(--light-grey);
+      line-height: 1.8;
+      margin: 12px 0;
+    }
+
+    .email {
+      display: block;
+      color: var(--orange);
+      font-size: 22px;
+      font-weight: 900;
+      text-decoration: none;
+      margin: 10px 0;
+      word-break: break-word;
+    }
+
+    footer {
+      padding: 30px 7%;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: var(--grey);
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: 1s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .hero, .split, .grid, .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .orb {
+        max-width: 420px;
+        margin: auto;
+      }
+
+      section {
+        padding: 90px 6%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="noise"></div>
+
+  <header>
+    <div class="logo">NOBAL <span>CONSULT</span></div>
+
+    <nav>
+      <a href="#about" data-i18n="navAbout">About us</a>
+      <a href="#services" data-i18n="navServices">Services</a>
+      <a href="#projects" data-i18n="navProjects">Projects</a>
+      <a href="#why" data-i18n="navWhy">Why NOBAL</a>
+      <a href="#contact" data-i18n="navContact">Contact</a>
+
+      <div class="language">
+        <button class="active" onclick="setLanguage('en')" id="enBtn">EN</button>
+        <button onclick="setLanguage('nl')" id="nlBtn">NL</button>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="reveal">
+      <div class="tag" data-i18n="heroTag">ENERGY INFRASTRUCTURE CONSULTANCY</div>
+      <h1 data-i18n="heroTitle">Engineering Excellence for <span>Energy Infrastructure</span></h1>
+      <p data-i18n="heroText">Delivering measurable outcomes for complex energy and infrastructure projects.</p>
+
+      <div class="buttons">
+        <a href="#services" class="btn btn-primary" data-i18n="heroBtn1">Explore Services</a>
+        <a href="#contact" class="btn btn-secondary" data-i18n="heroBtn2">Schedule a Consultation</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <strong>15+</strong>
+          <span data-i18n="stat1">Years Experience</span>
+        </div>
+        <div class="stat">
+          <strong>98%</strong>
+          <span data-i18n="stat2">On-Time Delivery</span>
+        </div>
+        <div class="stat">
+          <strong>3</strong>
+          <span data-i18n="stat3">Ongoing Projects</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="orb reveal">
+      <h3 data-i18n="orbText">Offshore Wind<br>Oil & Gas<br>Critical Infrastructure</h3>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="split">
+      <div class="reveal">
+        <div class="tag" data-i18n="aboutTag">ABOUT US</div>
+        <h2 class="section-title" data-i18n="aboutTitle">About <span>NOBAL Consult</span></h2>
+      </div>
+
+      <div class="reveal">
+        <p class="big-text" data-i18n="aboutText">
+          At NOBAL Consult, we are dedicated to guiding your projects from concept to completion with precision and expertise. With extensive experience in offshore wind, oil & gas, and critical infrastructure sectors, we specialize in risk management and project planning services that deliver sustainable and efficient solutions.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:40px;">
+      <div class="card reveal">
+        <h3 data-i18n="missionTitle">Our Mission</h3>
+        <p data-i18n="missionText">To provide exceptional consulting services that optimize project outcomes and mitigate risks in complex energy and infrastructure developments.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3 data-i18n="visionTitle">Our Vision</h3>
+        <p data-i18n="visionText">To be the leading partner for organizations seeking to optimize risk and project outcomes.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3 data-i18n="valuesTitle">Our Values</h3>
+        <p data-i18n="valuesText">Integrity, Excellence, Collaboration, Innovation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="reveal">
+      <div class="tag" data-i18n="servicesTag">WHAT WE DO</div>
+      <h2 class="section-title" data-i18n="servicesTitle">Comprehensive solutions across the <span>full project lifecycle</span></h2>
+      <p class="big-text" data-i18n="servicesIntro">
+        We provide comprehensive solutions across the full project lifecycle, from initial feasibility through execution and closeout. Our integrated approach ensures seamless coordination and exceptional results.
+      </p>
+    </div>
+
+    <div class="grid" style="margin-top:45px;">
+      <div class="card reveal">
+        <h3 data-i18n="planningTitle">Project Planning</h3>
+        <ul>
+          <li data-i18n="planning1">Feasibility Studies</li>
+          <li data-i18n="planning2">Project Scheduling and Control</li>
+          <li data-i18n="planning3">Resource Allocation Optimization</li>
+          <li data-i18n="planning4">Stakeholder Management</li>
+        </ul>
+        <p style="margin-top:18px;" data-i18n="planningDeliverables">
+          Deliverables: Detailed project schedules, resource plans, stakeholder communication strategies.
+        </p>
+      </div>
+
+      <div class="card reveal">
+        <h3 data-i18n="riskTitle">Risk Management</h3>
+        <ul>
+          <li data-i18n="risk1">Risk Identification and Assessment</li>
+          <li data-i18n="risk2">Mitigation Strategies Development</li>
+          <li data-i18n="risk3">Regulatory Compliance Advisory</li>
+          <li data-i18n="risk4">Safety Risk Analysis</li>
+        </ul>
+        <p style="margin-top:18px;" data-i18n="riskDeliverables">
+          Deliverables: Risk registers, mitigation plans, compliance frameworks, safety protocols.
+        </p>
+      </div>
+
+      <div class="card reveal">
+        <h3 data-i18n="consultancyTitle">Consultancy</h3>
+        <ul>
+          <li data-i18n="consultancy1">Project Scheduling Development</li>
+          <li data-i18n="consultancy2">Resource Optimization</li>
+          <li data-i18n="consultancy3">Risk Assessment</li>
+          <li data-i18n="consultancy4">Quality Assurance and Control</li>
+        </ul>
+        <p style="margin-top:18px;" data-i18n="consultancyDeliverables">
+          Deliverables: QA/QC plans, optimization reports, expert advisory sessions.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="projects">
+    <div class="reveal">
+      <div class="tag" data-i18n="projectsTag">PROJECTS</div>
+      <h2 class="section-title" data-i18n="projectsTitle">Selected <span>Projects</span></h2>
+    </div>
+
+    <div class="grid">
+      <div class="card reveal">
+        <div class="project-label">TenneT</div>
+        <h3 data-i18n="project1Title">2GW Programme</h3>
+        <p data-i18n="project1Location">Large Projects Offshore, Netherlands</p>
+        <br>
+        <p data-i18n="project1Text">
+          PMO support and strategic analysis for TenneT's 2GW offshore infrastructure programme, delivering data-driven insights for project decision-making and supporting FIDIC-based contract management frameworks.
+        </p>
+      </div>
+
+      <div class="card reveal">
+        <div class="project-label">Siemens Energy</div>
+        <h3 data-i18n="project2Title">GRQ380kV</h3>
+        <p data-i18n="project2Location">Eemshaven, Netherlands</p>
+        <br>
+        <p data-i18n="project2Text">
+          Strategic advisory and advanced P6 scheduling for high-voltage project integration, coordinating offshore and onshore operations through EVM, Critical Path analysis, and scenario planning methodologies.
+        </p>
+      </div>
+
+      <div class="card reveal">
+        <div class="project-label">Van Oord</div>
+        <h3 data-i18n="project3Title">Sofia Offshore Wind Farm</h3>
+        <p data-i18n="project3Location">1.4 GW - North Sea, RWE</p>
+        <br>
+        <p data-i18n="project3Text">
+          Consulting on EPCI planning and strategic coordination for monopile foundations and inter-array cables, providing directorate-level project insights through Primavera P6 scheduling and advanced analytics.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="reveal">
+      <div class="tag" data-i18n="whyTag">WHY NOBAL CONSULT?</div>
+      <h2 class="section-title" data-i18n="whyTitle">Why choose <span>NOBAL Consult?</span></h2>
+    </div>
+
+    <div class="grid">
+      <div class="card reveal">
+        <h3 data-i18n="why1Title">Expertise and Experience</h3>
+        <p data-i18n="why1Text">Over 15 years of proven track record in offshore wind, oil & gas, and critical infrastructure projects across Europe, with 98% on-time project delivery rate.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3 data-i18n="why2Title">Industry Specialization</h3>
+        <p data-i18n="why2Text">Deep expertise in energy sector complexities, from regulatory frameworks to technical specifications, ensuring informed decision-making throughout your project lifecycle.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3 data-i18n="why3Title">Customized Solutions</h3>
+        <p data-i18n="why3Text">We tailor our methodologies to meet your specific project needs and objectives, whether greenfield development or brownfield optimization.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3 data-i18n="why4Title">Client-Centric Approach</h3>
+        <p data-i18n="why4Text">Your goals are our goals. We work closely with you to ensure project success through transparent communication and collaborative problem-solving.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3 data-i18n="why5Title">Sustainable Infrastructure</h3>
+        <p data-i18n="why5Text">Empowering sustainable infrastructure through expert risk management and project planning.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3 data-i18n="why6Title">International Reach</h3>
+        <p data-i18n="why6Text">We serve clients across Europe and internationally in the energy and infrastructure sectors.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-box reveal">
+      <div class="tag" data-i18n="contactTag">GET IN TOUCH</div>
+      <h2 class="section-title" data-i18n="contactTitle">Contact <span>Us</span></h2>
+      <p data-i18n="contactText">Contact us today to discover how we can contribute to your project's success.</p>
+
+      <p><strong>Email:</strong></p>
+      <a class="email" href="mailto:RHK@NOBALCO.com">RHK@NOBALCO.com</a>
+      <a class="email" href="mailto:WWW@NOBALPartners.com">WWW@NOBALPartners.com</a>
+
+      <p><strong data-i18n="locationLabel">Location:</strong></p>
+      <p data-i18n="locationText">Amsterdam, Netherlands</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 NOBAL Consult. <span data-i18n="rights">All rights reserved.</span></p>
+    <p data-i18n="footerText">Engineering Excellence for Energy Infrastructure</p>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        navAbout: "About us",
+        navServices: "Services",
+        navProjects: "Projects",
+        navWhy: "Why NOBAL",
+        navContact: "Contact",
+
+        heroTag: "ENERGY INFRASTRUCTURE CONSULTANCY",
+        heroTitle: "Engineering Excellence for <span>Energy Infrastructure</span>",
+        heroText: "Delivering measurable outcomes for complex energy and infrastructure projects.",
+        heroBtn1: "Explore Services",
+        heroBtn2: "Schedule a Consultation",
+        stat1: "Years Experience",
+        stat2: "On-Time Delivery",
+        stat3: "Ongoing Projects",
+        orbText: "Offshore Wind<br>Oil & Gas<br>Critical Infrastructure",
+
+        aboutTag: "ABOUT US",
+        aboutTitle: "About <span>NOBAL Consult</span>",
+        aboutText: "At NOBAL Consult, we are dedicated to guiding your projects from concept to completion with precision and expertise. With extensive experience in offshore wind, oil & gas, and critical infrastructure sectors, we specialize in risk management and project planning services that deliver sustainable and efficient solutions.",
+        missionTitle: "Our Mission",
+        missionText: "To provide exceptional consulting services that optimize project outcomes and mitigate risks in complex energy and infrastructure developments.",
+        visionTitle: "Our Vision",
+        visionText: "To be the leading partner for organizations seeking to optimize risk and project outcomes.",
+        valuesTitle: "Our Values",
+        valuesText: "Integrity, Excellence, Collaboration, Innovation.",
+
+        servicesTag: "WHAT WE DO",
+        servicesTitle: "Comprehensive solutions across the <span>full project lifecycle</span>",
+        servicesIntro: "We provide comprehensive solutions across the full project lifecycle, from initial feasibility through execution and closeout. Our integrated approach ensures seamless coordination and exceptional results.",
+
+        planningTitle: "Project Planning",
+        planning1: "Feasibility Studies",
+        planning2: "Project Scheduling and Control",
+        planning3: "Resource Allocation Optimization",
+        planning4: "Stakeholder Management",
+        planningDeliverables: "Deliverables: Detailed project schedules, resource plans, stakeholder communication strategies.",
+
+        riskTitle: "Risk Management",
+        risk1: "Risk Identification and Assessment",
+        risk2: "Mitigation Strategies Development",
+        risk3: "Regulatory Compliance Advisory",
+        risk4: "Safety Risk Analysis",
+        riskDeliverables: "Deliverables: Risk registers, mitigation plans, compliance frameworks, safety protocols.",
+
+        consultancyTitle: "Consultancy",
+        consultancy1: "Project Scheduling Development",
+        consultancy2: "Resource Optimization",
+        consultancy3: "Risk Assessment",
+        consultancy4: "Quality Assurance and Control",
+        consultancyDeliverables: "Deliverables: QA/QC plans, optimization reports, expert advisory sessions.",
+
+        projectsTag: "PROJECTS",
+        projectsTitle: "Selected <span>Projects</span>",
+        project1Title: "2GW Programme",
+        project1Location: "Large Projects Offshore, Netherlands",
+        project1Text: "PMO support and strategic analysis for TenneT's 2GW offshore infrastructure programme, delivering data-driven insights for project decision-making and supporting FIDIC-based contract management frameworks.",
+        project2Title: "GRQ380kV",
+        project2Location: "Eemshaven, Netherlands",
+        project2Text: "Strategic advisory and advanced P6 scheduling for high-voltage project integration, coordinating offshore and onshore operations through EVM, Critical Path analysis, and scenario planning methodologies.",
+        project3Title: "Sofia Offshore Wind Farm",
+        project3Location: "1.4 GW - North Sea, RWE",
+        project3Text: "Consulting on EPCI planning and strategic coordination for monopile foundations and inter-array cables, providing directorate-level project insights through Primavera P6 scheduling and advanced analytics.",
+
+        whyTag: "WHY NOBAL CONSULT?",
+        whyTitle: "Why choose <span>NOBAL Consult?</span>",
+        why1Title: "Expertise and Experience",
+        why1Text: "Over 15 years of proven track record in offshore wind, oil & gas, and critical infrastructure projects across Europe, with 98% on-time project delivery rate.",
+        why2Title: "Industry Specialization",
+        why2Text: "Deep expertise in energy sector complexities, from regulatory frameworks to technical specifications, ensuring informed decision-making throughout your project lifecycle.",
+        why3Title: "Customized Solutions",
+        why3Text: "We tailor our methodologies to meet your specific project needs and objectives, whether greenfield development or brownfield optimization.",
+        why4Title: "Client-Centric Approach",
+        why4Text: "Your goals are our goals. We work closely with you to ensure project success through transparent communication and collaborative problem-solving.",
+        why5Title: "Sustainable Infrastructure",
+        why5Text: "Empowering sustainable infrastructure through expert risk management and project planning.",
+        why6Title: "International Reach",
+        why6Text: "We serve clients across Europe and internationally in the energy and infrastructure sectors.",
+
+        contactTag: "GET IN TOUCH",
+        contactTitle: "Contact <span>Us</span>",
+        contactText: "Contact us today to discover how we can contribute to your project's success.",
+        locationLabel: "Location:",
+        locationText: "Amsterdam, Netherlands",
+        rights: "All rights reserved.",
+        footerText: "Engineering Excellence for Energy Infrastructure"
+      },
+
+      nl: {
+        navAbout: "Over ons",
+        navServices: "Diensten",
+        navProjects: "Projecten",
+        navWhy: "Waarom NOBAL",
+        navContact: "Contact",
+
+        heroTag: "CONSULTANCY VOOR ENERGIE-INFRASTRUCTUUR",
+        heroTitle: "Technische excellentie voor <span>energie-infrastructuur</span>",
+        heroText: "Wij leveren meetbare resultaten voor complexe energie- en infrastructuurprojecten.",
+        heroBtn1: "Bekijk diensten",
+        heroBtn2: "Plan een consult",
+        stat1: "Jaar ervaring",
+        stat2: "Tijdige oplevering",
+        stat3: "Lopende projecten",
+        orbText: "Offshore wind<br>Olie & gas<br>Kritieke infrastructuur",
+
+        aboutTag: "OVER ONS",
+        aboutTitle: "Over <span>NOBAL Consult</span>",
+        aboutText: "Bij NOBAL Consult begeleiden wij uw projecten van concept tot oplevering met precisie en expertise. Met ruime ervaring in offshore wind, olie & gas en kritieke infrastructuur zijn wij gespecialiseerd in risicobeheer en projectplanning. Zo leveren wij duurzame en efficiënte oplossingen.",
+        missionTitle: "Onze missie",
+        missionText: "Het leveren van uitzonderlijke consultancydiensten die projectresultaten optimaliseren en risico’s beperken binnen complexe energie- en infrastructuurontwikkelingen.",
+        visionTitle: "Onze visie",
+        visionText: "De toonaangevende partner zijn voor organisaties die risico’s willen beheersen en projectresultaten willen optimaliseren.",
+        valuesTitle: "Onze waarden",
+        valuesText: "Integriteit, excellentie, samenwerking en innovatie.",
+
+        servicesTag: "WAT WIJ DOEN",
+        servicesTitle: "Uitgebreide oplossingen gedurende de <span>volledige projectlevenscyclus</span>",
+        servicesIntro: "Wij bieden uitgebreide oplossingen gedurende de volledige projectlevenscyclus, van de eerste haalbaarheidsfase tot uitvoering en afronding. Onze geïntegreerde aanpak zorgt voor soepele coördinatie en uitstekende resultaten.",
+
+        planningTitle: "Projectplanning",
+        planning1: "Haalbaarheidsstudies",
+        planning2: "Projectplanning en projectbeheersing",
+        planning3: "Optimalisatie van middeleninzet",
+        planning4: "Stakeholdermanagement",
+        planningDeliverables: "Deliverables: gedetailleerde projectplanningen, resourceplannen en strategieën voor stakeholdercommunicatie.",
+
+        riskTitle: "Risicobeheer",
+        risk1: "Risico-identificatie en risicobeoordeling",
+        risk2: "Ontwikkeling van risicobeperkende strategieën",
+        risk3: "Advies over naleving van wet- en regelgeving",
+        risk4: "Analyse van veiligheidsrisico’s",
+        riskDeliverables: "Deliverables: risicoregisters, mitigatieplannen, compliancekaders en veiligheidsprotocollen.",
+
+        consultancyTitle: "Consultancy",
+        consultancy1: "Ontwikkeling van projectplanningen",
+        consultancy2: "Optimalisatie van middelen",
+        consultancy3: "Risicobeoordeling",
+        consultancy4: "Kwaliteitsborging en kwaliteitscontrole",
+        consultancyDeliverables: "Deliverables: QA/QC-plannen, optimalisatierapporten en deskundige adviessessies.",
+
+        projectsTag: "PROJECTEN",
+        projectsTitle: "Geselecteerde <span>projecten</span>",
+        project1Title: "2GW-programma",
+        project1Location: "Large Projects Offshore, Nederland",
+        project1Text: "PMO-ondersteuning en strategische analyse voor het 2GW offshore-infrastructuurprogramma van TenneT, met datagedreven inzichten voor projectbesluitvorming en ondersteuning van FIDIC-gebaseerde contractmanagementkaders.",
+        project2Title: "GRQ380kV",
+        project2Location: "Eemshaven, Nederland",
+        project2Text: "Strategisch advies en geavanceerde P6-planning voor de integratie van hoogspanningsprojecten, waarbij offshore- en onshoreactiviteiten worden gecoördineerd met EVM, kritieke-padanalyse en scenarioplanning.",
+        project3Title: "Sofia Offshore Wind Farm",
+        project3Location: "1,4 GW - Noordzee, RWE",
+        project3Text: "Consultancy voor EPCI-planning en strategische coördinatie van monopile-funderingen en inter-array-kabels, met projectinzichten op directieniveau via Primavera P6-planning en geavanceerde analyses.",
+
+        whyTag: "WAAROM NOBAL CONSULT?",
+        whyTitle: "Waarom kiezen voor <span>NOBAL Consult?</span>",
+        why1Title: "Expertise en ervaring",
+        why1Text: "Meer dan 15 jaar bewezen ervaring in offshore wind, olie & gas en kritieke infrastructuurprojecten in Europa, met een tijdige opleveringsgraad van 98%.",
+        why2Title: "Branchespecialisatie",
+        why2Text: "Diepgaande expertise in de complexiteit van de energiesector, van regelgevingskaders tot technische specificaties, zodat er gedurende de hele projectlevenscyclus weloverwogen beslissingen kunnen worden genomen.",
+        why3Title: "Oplossingen op maat",
+        why3Text: "Wij stemmen onze methodieken af op uw specifieke projectbehoeften en doelstellingen, zowel bij greenfieldontwikkeling als bij brownfieldoptimalisatie.",
+        why4Title: "Klantgerichte aanpak",
+        why4Text: "Uw doelen zijn onze doelen. Wij werken nauw met u samen om projectsucces te realiseren door transparante communicatie en gezamenlijke probleemoplossing.",
+        why5Title: "Duurzame infrastructuur",
+        why5Text: "Wij versterken duurzame infrastructuur met deskundig risicobeheer en professionele projectplanning.",
+        why6Title: "Internationaal bereik",
+        why6Text: "Wij bedienen klanten in Europa en internationaal binnen de energie- en infrastructuursector.",
+
+        contactTag: "NEEM CONTACT OP",
+        contactTitle: "Contact <span>opnemen</span>",
+        contactText: "Neem vandaag nog contact met ons op en ontdek hoe wij kunnen bijdragen aan het succes van uw project.",
+        locationLabel: "Locatie:",
+        locationText: "Amsterdam, Nederland",
+        rights: "Alle rechten voorbehouden.",
+        footerText: "Technische excellentie voor energie-infrastructuur"
+      }
+    };
+
+    function setLanguage(lang) {
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        el.innerHTML = translations[lang][key];
+      });
+
+      document.getElementById("enBtn").classList.toggle("active", lang === "en");
+      document.getElementById("nlBtn").classList.toggle("active", lang === "nl");
+    }
+
+    const reveals = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
