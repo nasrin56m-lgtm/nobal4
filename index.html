@@ -7,12 +7,12 @@
 
   <style>
     :root {
-      --orange: #f47a1f;
-      --orange-dark: #c9570e;
-      --black: #202020;
-      --grey: #b0b0b0;
-      --dark-grey: #343434;
-      --light-grey: #ededed;
+      --orange: #ff8a2a;
+      --orange-dark: #e06616;
+      --black: #343434;
+      --grey: #c8c8c8;
+      --dark-grey: #505050;
+      --light-grey: #ffffff;
     }
 
     * {
@@ -37,9 +37,9 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(circle at 20% 20%, rgba(244, 122, 31, 0.3), transparent 30%),
-        radial-gradient(circle at 80% 60%, rgba(180, 180, 180, 0.2), transparent 35%),
-        linear-gradient(135deg, #202020, #2e2e2e, #242424);
+        radial-gradient(circle at 20% 20%, rgba(255, 138, 42, 0.34), transparent 30%),
+        radial-gradient(circle at 80% 60%, rgba(210, 210, 210, 0.24), transparent 35%),
+        linear-gradient(135deg, #343434, #454545, #3a3a3a);
       z-index: -2;
     }
 
@@ -62,7 +62,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(32, 32, 32, .82);
+      background: rgba(48, 48, 48, .86);
       backdrop-filter: blur(18px);
       border-bottom: 1px solid rgba(255,255,255,.12);
     }
@@ -98,7 +98,7 @@
     .language {
       display: flex;
       gap: 8px;
-      background: #303030;
+      background: #4a4a4a;
       padding: 5px;
       border-radius: 50px;
       border: 1px solid rgba(255,255,255,.1);
@@ -201,9 +201,9 @@
       aspect-ratio: 1;
       border-radius: 50%;
       background:
-        linear-gradient(145deg, rgba(244,122,31,.95), rgba(56,56,56,.9)),
+        linear-gradient(145deg, rgba(255,138,42,.95), rgba(78,78,78,.9)),
         radial-gradient(circle, var(--orange), transparent);
-      box-shadow: 0 0 90px rgba(244,122,31,.38);
+      box-shadow: 0 0 90px rgba(255,138,42,.4);
       animation: float 5s ease-in-out infinite;
       display: flex;
       align-items: center;
@@ -235,7 +235,7 @@
     }
 
     .card {
-      background: rgba(52,52,52,.82);
+      background: rgba(76,76,76,.86);
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 28px;
       padding: 34px;
@@ -257,7 +257,7 @@
 
     .card:hover {
       transform: translateY(-10px);
-      border-color: rgba(244,122,31,.65);
+      border-color: rgba(255,138,42,.7);
       box-shadow: 0 25px 70px rgba(0,0,0,.5);
     }
 
@@ -333,8 +333,8 @@
       max-width: 900px;
       margin: auto;
       text-align: center;
-      background: linear-gradient(145deg, rgba(244,122,31,.2), rgba(52,52,52,.95));
-      border: 1px solid rgba(244,122,31,.38);
+      background: linear-gradient(145deg, rgba(255,138,42,.24), rgba(76,76,76,.95));
+      border: 1px solid rgba(255,138,42,.4);
       padding: 55px;
       border-radius: 36px;
     }
