@@ -225,20 +225,20 @@
 
     .section-title {
       font-size: clamp(36px, 5vw, 68px);
-      margin-bottom: 35px;
+      margin-bottom: 24px; padding-bottom: 22px; border-bottom: 1px solid rgba(255,255,255,.12); max-width: 920px;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+      gap: 28px;
     }
 
     .card {
-      background: rgba(76,76,76,.86);
+      background: rgba(82,82,82,.78);
       border: 1px solid rgba(255,255,255,.12);
-      border-radius: 28px;
-      padding: 34px;
+      border-radius: 8px;
+      padding: 36px; box-shadow: 0 18px 45px rgba(0,0,0,.18);
       transition: .35s;
       overflow: hidden;
       position: relative;
@@ -256,9 +256,9 @@
     }
 
     .card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-6px);
       border-color: rgba(255,138,42,.7);
-      box-shadow: 0 25px 70px rgba(0,0,0,.5);
+      box-shadow: 0 22px 55px rgba(0,0,0,.28);
     }
 
     .card:hover::before {
@@ -291,8 +291,8 @@
 
     .big-text {
       color: var(--light-grey);
-      font-size: 18px;
-      line-height: 1.8;
+      font-size: 19px;
+      line-height: 1.75;
     }
 
     .stats {
@@ -341,7 +341,7 @@
 
     .contact-box p {
       color: var(--light-grey);
-      line-height: 1.8;
+      line-height: 1.75;
       margin: 12px 0;
     }
 
